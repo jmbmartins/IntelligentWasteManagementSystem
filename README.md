@@ -29,11 +29,6 @@ Solution:
 5.  Create a **web page** for waste management companies to have an **overview of each container in each city**, showing the fill level and waste type. The dashboard allows **real-time data visualization and report generation on waste collection efficiency in different areas**. Based on the dashboard data, the company can plan **waste collection routes more efficiently**, prioritizing containers with higher fill levels and optimizing the management of different types of waste.
 7.  **Place a panel on the garbage container** that alerts whether the garbage is full or not, thus avoiding **unnecessary stops** for garbage collectors.
 
-### Benefits:
-
--   Improved waste management, reducing container overflow and enhancing collection efficiency.
--   Facilitation for local residents to find available containers for the type of waste they wish to dispose of.
--   Reduced fuel consumption and pollutant emissions associated with waste collection.
 
 ### Challenges:
 
@@ -41,6 +36,3 @@ Solution:
 -   Developing an intuitive and user-friendly mobile application for local residents.
 -   Integrating existing waste management systems with the new intelligent management solution.
 
-### Conclusion:
-
--   The Intelligent Waste Management System not only addresses the daily challenges of waste management but also promotes sustainability and efficiency in urban environments. This project has the potential to significantly improve residents' quality of life and reduce the environmental impact associated with waste management.
