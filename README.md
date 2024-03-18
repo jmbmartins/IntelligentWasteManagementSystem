@@ -25,10 +25,9 @@ Solution:
 1.  Install IoT sensors on garbage containers to measure the fill level. (3 fill levels: low, medium, high) and classify the type of waste (organic, recyclable, non-recyclable).
 2.  Connect the sensors to the microcontroller.
 3.  The microcontroller collects data from the sensors and sends it to the cloud server or IoT platform.
-4.  Develop a mobile application for local residents to view nearby garbage containers, their fill level, and the type of waste they can deposit. Users can choose where to dispose of their waste based on container availability and waste type.
-5.  Create a web page for waste management companies to have an overview of each container in each city, showing the fill level and waste type. The dashboard allows real-time data visualization and report generation on waste collection efficiency in different areas.
-6.  Based on the dashboard data, the company can plan waste collection routes more efficiently, prioritizing containers with higher fill levels and optimizing the management of different types of waste.
-7.  Place a panel on the garbage container that alerts whether the garbage is full or not, thus avoiding unnecessary stops for garbage collectors.
+4.  Develop a **mobile application for local residents** to view **nearby garbage containers**, their **fill level**, and the type of waste they can deposit. Users can **choose where to dispose of their waste based on container availability and waste type**.
+5.  Create a **web page** for waste management companies to have an **overview of each container in each city**, showing the fill level and waste type. The dashboard allows **real-time data visualization and report generation on waste collection efficiency in different areas**. Based on the dashboard data, the company can plan **waste collection routes more efficiently**, prioritizing containers with higher fill levels and optimizing the management of different types of waste.
+7.  **Place a panel on the garbage container** that alerts whether the garbage is full or not, thus avoiding **unnecessary stops** for garbage collectors.
 
 ### Benefits:
 
