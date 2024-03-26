@@ -31,14 +31,15 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 -   Integrating the new system with existing waste management systems.
 -   Maintaining connectivity and performing adequate system maintenance over time.
 
-----------------------------------------------------------------------------------------------
-
-# State of Art 
-An Intelligent Internet of Things (IoT) based Automatic Dry and Wet Medical Waste Segregation and Management System - https://ieeexplore.ieee.org/document/10010913
-
 #### Expected Benefits:
 
 -   Reduction in environmental pollution and public health risks.
 -   Optimization of waste collection operations, leading to cost savings.
 -   Active community participation in waste management.
 -   Improved transparency and efficiency in urban waste management.
+
+----------------------------------------------------------------------------------------------
+
+# State of Art 
+An Intelligent Internet of Things (IoT) based Automatic Dry and Wet Medical Waste Segregation and Management System - https://ieeexplore.ieee.org/document/10010913
+
