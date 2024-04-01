@@ -12,8 +12,8 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 
 1.  Ultrasonic Sensors: Installed in waste bins to measure the fill level.
 2.  Microcontroller: Responsible for collecting and processing sensor data.
-3.  Connectivity: Use of Wi-Fi or GSM module to transmit data to a cloud server.
-4.  Cloud Server or IoT Platform: Stores and analyzes sensor data, providing insights and management functionalities.
+3.  Connectivity: Use of Wi-Fi to transmit data to a cloud server.
+4.  Cloud Server: Stores and analyzes sensor data.
 5.  Mobile Application for Residents: Allows residents to locate nearby waste bins, view their fill level, and choose where to dispose of their waste based on occupancy.
 6.  Web Dashboard for Waste Management Companies: Provides an overview of all waste bins under the company's responsibility, with detailed information on fill level and collection efficiency reports.
 
