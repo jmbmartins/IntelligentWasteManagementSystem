@@ -41,5 +41,5 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 ----------------------------------------------------------------------------------------------
 
 # State of Art 
-An Intelligent Internet of Things (IoT) based Automatic Dry and Wet Medical Waste Segregation and Management System - https://ieeexplore.ieee.org/document/10010913
+Design and Development of GIOT based Intelligent Smart Waste Management and Predictive Modelling - https://ieeexplore.ieee.org/document/9777210 https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777210
 
