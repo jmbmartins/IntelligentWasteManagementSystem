@@ -24,6 +24,7 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 3.  The mobile application enables residents to access real-time information and make informed waste disposal decisions.
 4.  Waste management companies use the web dashboard to monitor and optimize collection operations based on real-time sensor data.
 
+
 #### Challenges:
 
 -   Ensuring the accuracy and reliability of ultrasonic sensors.
@@ -40,6 +41,25 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 
 ----------------------------------------------------------------------------------------------
 
-# State of Art 
+#### State of Art 
 Design and Development of GIOT based Intelligent Smart Waste Management and Predictive Modelling - https://ieeexplore.ieee.org/document/9777210 https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777210
 
+-----------------------------------------------------------------------------------------------
+#### Database Design
+
+1.  `Users` Table:
+
+    -   `UserID`: a unique identifier for each user (primary key).
+    -   `Username`: the chosen username.
+    -   `Password`: the user's password (should be stored securely, for example, as a hash).
+    -   `RegionID`: an identifier for the user's region (foreign key).
+2.  `Regions` Table:
+
+    -   `RegionID`: a unique identifier for each region (primary key).
+    -   `RegionName`: the name of the region.
+3.  `Bins` Table:
+
+    -   `BinID`: a unique identifier for each waste bin (primary key).
+    -   `RegionID`: an identifier for the region where the waste bin is located (foreign key).
+    -   `FillLevel`: the current fill level of the waste bin.
+---------------------------------------------------------
