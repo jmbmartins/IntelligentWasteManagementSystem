@@ -19,7 +19,7 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 
 #### Operation:
 
-1.  Ultrasonic sensors continuously monitor the fill level of waste bins.
+1.  Multiple Ultrasonic Sensors: Installed in waste bins to measure the fill level more accurately and comprehensively
 2.  Data is sent to the microcontroller, which transmits it to the cloud server.
 3.  The mobile application enables residents to access real-time information and make informed waste disposal decisions.
 4.  Waste management companies use the web dashboard to monitor and optimize collection operations based on real-time sensor data.
