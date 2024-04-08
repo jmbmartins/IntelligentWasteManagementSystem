@@ -23,12 +23,12 @@ Development of an Intelligent Waste Management System that utilizes IoT (Interne
 2.  Data is sent to the microcontroller, which transmits it to the cloud server.
 3.  The mobile application enables residents to access real-time information and make informed waste disposal decisions.
 4.  Waste management companies use the web dashboard to monitor and optimize collection operations based on real-time sensor data.
-5.  Additionally, a panel will be added to the waste bin to indicate the level of filling. This panel will display the following colors, indicating the level of filling:
+5.  Additionally, a panel will be added to the waste bin to indicate the level of filling. This panel will display the following text, indicating the level of filling:
 
--   Very low: Green
--   Low: White
--   Moderate: Yellow
--   High: Red
+-   Very low
+-   Low
+-   Moderate
+-   High
 
 The filling level will be determined based on the data collected by the ultrasonic sensors and will be updated in real-time to provide visual information to residents and waste management personnel.
 
