@@ -60,8 +60,7 @@ Material Used:
  - Ultrasonic Sensors
  - Microcontroller (e.g., Arduino)
  - Servo Motors: Employ servo motors to enable the sweeping motion of the ultrasonic sensors for scanning the environment. The servo motors will help in obtaining 3D coordinates from different angles for mapping    purposes.
- - PC/Laptop: Utilize a computer to receive and process the data collected by the ultrasonic sensors. You can use software like Processing and Matlab for data analysis, conversion of coordinates, and         
-   visualization of the 3D surface contour map.
+ - PC/Laptop: Utilize a computer to receive and process the data collected by the ultrasonic sensors. Use software like Processing and Matlab for data analysis, conversion of coordinates, and        visualization of the 3D surface contour map.
 
 Technologies Used:
   - Arduino IDE for microcontroller programming
