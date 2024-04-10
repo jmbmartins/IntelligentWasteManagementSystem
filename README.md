@@ -10,8 +10,8 @@ Proposed Solution: Development of an Intelligent Waste Management System that ut
 
 1. Ultrasonic Sensors: Installed in waste bins to measure the fill level. These sensors are also used to create a 3D representation of the waste inside the bin, providing a more accurate measure of the fill level.
 2. Servo Motors: Employed to enable the sweeping motion of the ultrasonic sensors for scanning the waste inside the bin. The servo motors help in obtaining 3D coordinates from different angles for mapping purposes.
-3. Microcontroller (Arduino): Responsible for collecting and processing sensor data. It interfaces with the ultrasonic sensors and servo motors, and transfers the collected data to a PC through the Arduino serial port.
-4. PC/Laptop: Utilized to receive and process the data collected by the ultrasonic sensors. Software like Processing and Matlab are used for data analysis, conversion of coordinates, and visualization of the 3D surface contour map of the waste inside the bin
+3. Microcontroller (Arduino): Responsible for collecting and processing sensor data. It interfaces with the ultrasonic sensors and servo motors, and transfers the collected data to the cloud server.
+4. PC/Laptop: After the microcontroller sends the ultrasonic sensor values to the Firestore cloud, the PC retrieves this data and processes it. This involves creating 3D coordinates from the sensor values, transforming these coordinates to a 2D representation, and then calculating the fill level percentage. The calculated fill level is then registered in Firestore cloud to be used by the mobile and web applications.
 5.  GPS Module: Installed in each waste bin to track its location.
 6.  Connectivity: Use of Wi-Fi to transmit data to a cloud server.
 7.  Cloud Server: Firebase is used to store and analyze sensor data.
