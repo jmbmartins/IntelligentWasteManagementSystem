@@ -94,7 +94,7 @@ Metodology:
 #### Flow of Mobile Application
 
 1.  Region Selection:
-    -   When the user opens the application for the first time or after logging out, prompt the user to choose their current region from a list of available regions.
+    -   When the user opens the application for the first time, prompt the user to choose their current region from a list of available regions.
 2.  Main Page:
 
     -   Upon selecting the region, the main page should display a list of containers in the chosen region.
