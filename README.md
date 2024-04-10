@@ -86,6 +86,21 @@ Metodology:
 -----------------------------------------------------------------------------------------------
 #### Database Design
 
+-   `companies` collection:
+    -   Document ID: Auto-generated or use `ID_Employee`
+    -   Fields: `email`, `password`, `role`
+-   `regions` collection:
+    -   Document ID: Auto-generated or use `ID_Region`
+    -   Fields: `name_region`
+-   `containers` collection:
+    -   Document ID: Auto-generated or use `ID_Container`
+    -   Fields: `region_id`, `latitude`, `longitude`
+    -   Sub-collection: `sensor_data`
+        -   Document ID: Auto-generated or use `ID_Record`
+        -   Fields: `r1_r`, `r1_o`, `r2_r`, `r2_o`, `r3_r`, `r3_o`, `timestamp`
+    -   Sub-collection: `results_from_pc`
+        -   Document ID: Auto-generated or use `ID_Result`
+        -   Fields: `fill_level`, `timestamp`
 
 
 ---------------------------------------------------------
