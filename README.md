@@ -87,20 +87,20 @@ Metodology:
 #### Database Design
 
 -   `companies` collection:
-    -   Document ID: Auto-generated or use `ID_Employee`
-    -   Fields: `email`, `password`, `role`
+    -   Document ID: Auto-generated or use `ID_Employee` (String)
+    -   Fields: `email` (String), `password` (String), `role` (String)
 -   `regions` collection:
-    -   Document ID: Auto-generated or use `ID_Region`
-    -   Fields: `name_region`
+    -   Document ID: Auto-generated or use `ID_Region` (String)
+    -   Fields: `name_region` (String)
 -   `containers` collection:
-    -   Document ID: Auto-generated or use `ID_Container`
-    -   Fields: `region_id`, `latitude`, `longitude`
+    -   Document ID: Auto-generated or use `ID_Container` (String)
+    -   Fields: `region_id` (String), `latitude` (Float), `longitude` (Float)
     -   Sub-collection: `sensor_data`
-        -   Document ID: Auto-generated or use `ID_Record`
-        -   Fields: `r1_r`, `r1_o`, `r2_r`, `r2_o`, `r3_r`, `r3_o`, `timestamp`
+        -   Document ID: Auto-generated or use `ID_Record` (String)
+        -   Fields: `r1_r` (Float), `r1_o` (Float), `r2_r` (Float), `r2_o` (Float), `r3_r` (Float), `r3_o` (Float), `timestamp` (Timestamp)
     -   Sub-collection: `results_from_pc`
-        -   Document ID: Auto-generated or use `ID_Result`
-        -   Fields: `fill_level`, `timestamp`
+        -   Document ID: Auto-generated or use `ID_Result` (String)
+        -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
 
 
 ---------------------------------------------------------
