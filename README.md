@@ -25,15 +25,15 @@ Proposed Solution: Development of an Intelligent Waste Management System that ut
 
 #### Operation:
 
-1. Solar panels capture solar energy, which is regulated by the charge controller and stored in batteries.
-2. The DC-DC converter provides the required power to the ultrasonic sensors, microcontroller, GPS module, and Matrix LED 8x8.
-3. Ultrasonic sensors installed in waste bins measure the fill level and create a 3D representation of the waste inside the bin. They collect data in cylindrical coordinates, which are then converted to rectangular form for plotting a 3D scatter plot of the waste inside the bin.
-4. Servo motors enable the sweeping motion of the ultrasonic sensors, exploring the waste within a 180° range and incrementing position by 15º each time.
-5. The microcontroller collects the data from the ultrasonic sensors and transfers it to a PC through the Arduino serial port.
-6. The PC processes the real-world 3D coordinates using Processing and Matlab, and converts the scatter plot into a surface contour map of the scanned 3D environment inside the bin.
-7. The Matrix LED 8x8 displays the fill level in different colors: Green for "Low", Yellow for "Moderate", and Red for "High".
-8. The mobile application enables residents to access real-time information and make informed waste disposal decisions.
-9. Waste management companies use the web dashboard to monitor and optimize collection operations based on real-time sensor data and location information.
+1.  Solar panels capture solar energy, which is regulated by the charge controller and stored in batteries.
+2.  The DC-DC converter provides the required power to the ultrasonic sensors, microcontroller, GPS module, and Matrix LED 8x8.
+3.  Ultrasonic sensors installed in waste bins measure the fill level and create a 3D representation of the waste inside the bin. They collect data in cylindrical coordinates, which are then sent to the Firestore cloud by the microcontroller.
+4.  Servo motors enable the sweeping motion of the ultrasonic sensors, exploring the waste within a 180° range and incrementing position by 15º each time.
+5.  The microcontroller collects the data from the ultrasonic sensors and transfers it to the Firestore cloud.
+6.  The PC retrieves the sensor data from the Firestore cloud, processes the real-world 3D coordinates, and converts the scatter plot into a surface contour map of the scanned 3D environment inside the bin. It then calculates the fill level percentage and registers this value back in the Firestore cloud.
+7.  The Matrix LED 8x8 displays the fill level in different colors: Green for "Low", Yellow for "Moderate", and Red for "High".
+8.  The mobile application enables residents to access real-time information and make informed waste disposal decisions based on the fill level data stored in the Firestore cloud.
+9.  Waste management companies use the web dashboard to monitor and optimize collection operations based on real-time sensor data and location information from the Firestore cloud.
 
 #### Challenges:
 
