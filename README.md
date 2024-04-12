@@ -111,15 +111,12 @@ Metodology:
 1.  Region Selection:
     -   When the user opens the application for the first time, prompt the user to choose their current region from a list of available regions.
 2.  Main Page:
-
     -   Upon selecting the region, the main page should display a list of containers in the chosen region.
     -   Each container entry in the list should include:
         -   The fill level percentage.
         -   The distance between the container location and the user's current location.
     -   Include a lamp icon on the main page to suggest the best disposal option based on the user's location and the fill levels of nearby bins.
-    -   Provide a way for the user to easily navigate back to the main page from other sections of the application.
 3.  Change Region Option:
-
     -   In the main menu, include an icon or option to change the region to another one.
     -   When selected, prompt the user to choose a different region from the available list.
 4.  Remember Last Region:
