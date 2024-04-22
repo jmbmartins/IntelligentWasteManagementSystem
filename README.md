@@ -104,7 +104,7 @@ Metodology:
         -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
 
 #### SQL
-
+![Database Model Diagram](https://github.com/jmbmartins/IntelligentWasteManagementSystem/blob/main/sql_db/db_model.png)
 
 
 ---------------------------------------------------------
