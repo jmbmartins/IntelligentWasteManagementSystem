@@ -86,6 +86,7 @@ Metodology:
 -----------------------------------------------------------------------------------------------
 #### Database Design
 
+##### No SQL
 -   `companies` collection:
     -   Document ID: Auto-generated or use `ID_Employee` (String)
     -   Fields: `email` (String), `password` (String), `role` (String)
@@ -101,6 +102,9 @@ Metodology:
     -   Sub-collection: `results_from_pc`
         -   Document ID: Auto-generated or use `ID_Result` (String)
         -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
+
+#### SQL
+
 
 
 ---------------------------------------------------------
