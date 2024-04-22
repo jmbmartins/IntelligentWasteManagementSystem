@@ -86,6 +86,7 @@ Metodology:
 -----------------------------------------------------------------------------------------------
 #### Database Design
 
+##### No SQL
 -   `companies` collection:
     -   Document ID: Auto-generated or use `ID_Employee` (String)
     -   Fields: `email` (String), `password` (String), `role` (String)
@@ -101,6 +102,46 @@ Metodology:
     -   Sub-collection: `results_from_pc`
         -   Document ID: Auto-generated or use `ID_Result` (String)
         -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
+
+#### SQL
+Table Companie {
+  ID_Employee varchar [pk]
+  email varchar
+  password varchar
+  role varchar
+}
+
+Table Regions {
+  ID_Region varchar [pk]
+  name_region varchar
+}
+
+Table Containers {
+  ID_Container varchar [pk]
+  region_id varchar [ref: > Regions.ID_Region]
+  latitude float
+  longitude float
+}
+
+Table SensorData {
+  ID_Record varchar [pk]
+  ID_Container varchar [ref: > Containers.ID_Container]
+  s1_r float
+  s1_o float
+  s2_r float
+  s2_o float
+  s3_r float
+  s3_o float
+  timestamp timestamp
+}
+
+Table Final_Stats {
+  ID_Result varchar [pk]
+  ID_Container varchar [ref: > Containers.ID_Container]
+  fill_level float
+  timestamp timestamp
+}
+
 
 
 ---------------------------------------------------------
