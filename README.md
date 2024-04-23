@@ -169,6 +169,16 @@ Metodology:
 
 ----------------------------------------------------------
 
-#### Back-End and Front-End Servers Hosted by VM
+#### BackEnd and FrontEnd Servers Hosted by VM
+
+In this setup, we'll deploy a Node.js application along with a web server (Apache2) and PhpMyAdmin database on the same virtual machine (VM). This is a common configuration, especially when all these components are part of the same system.
+
+### Components:
+
+1.  Node.js Application: This serves as the **backend server**, responsible for handling API requests, processing data, and interacting with the database.
+
+2.  Web Server (Apache2): The web server serves static files and the **frontend** of your application. It acts as the interface between users' browsers and your Node.js backend.
+
+3.  PhpMyAdmin Database: PhpMyAdmin provides a graphical interface to manage the MySQL database. 
 
 
