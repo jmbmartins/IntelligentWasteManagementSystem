@@ -106,7 +106,39 @@ Metodology:
         -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
 
 #### SQL
-![Database Model Diagram](https://github.com/jmbmartins/IntelligentWasteManagementSystem/blob/main/sql_db/db_model.png)
+
+1. **Companie**
+    - `ID_Employee` (varchar(255), PRIMARY KEY)
+    - `email` (varchar(255))
+    - `password` (varchar(255))
+    - `role` (varchar(255))
+
+2. **Regions**
+    - `ID_Region` (varchar(255), PRIMARY KEY)
+    - `name_region` (varchar(255))
+
+3. **Containers**
+    - `ID_Container` (varchar(255), PRIMARY KEY)
+    - `region_id` (varchar(255), FOREIGN KEY REFERENCES `Regions` (`ID_Region`))
+    - `latitude` (float)
+    - `longitude` (float)
+
+4. **SensorData**
+    - `ID_Record` (varchar(255), PRIMARY KEY)
+    - `ID_Container` (varchar(255), FOREIGN KEY REFERENCES `Containers` (`ID_Container`))
+    - `s1_r` (float)
+    - `s1_o` (float)
+    - `s2_r` (float)
+    - `s2_o` (float)
+    - `s3_r` (float)
+    - `s3_o` (float)
+    - `timestamp` (timestamp)
+
+5. **Final_Stats**
+    - `ID_Result` (varchar(255), PRIMARY KEY)
+    - `ID_Container` (varchar(255), FOREIGN KEY REFERENCES `Containers` (`ID_Container`))
+    - `fill_level` (float)
+    - `timestamp` (timestamp)
 
 
 ---------------------------------------------------------
