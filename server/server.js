@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-require('dotenv').config();
+require('dotenv').config({ path: '../db_credentials.env' });
 
 // Create an Express application
 const app = express();
