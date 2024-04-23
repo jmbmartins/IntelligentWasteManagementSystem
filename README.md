@@ -164,3 +164,11 @@ Metodology:
 4. **Remember Last Region**:
     - Implement functionality to remember the last selected region by saving it in the shared preferences (local storage on the device).
     - When the user closes the app and opens it again, automatically navigate the user to the last selected region, retrieved from the shared preferences.
+    - 
+
+
+----------------------------------------------------------
+
+#### Back-End and Front-End Servers Hosted by VM
+
+
