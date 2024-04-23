@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+require('dotenv').config();
 
 // Create an Express application
 const app = express();
@@ -10,14 +11,14 @@ const port = 3000;
 // Middleware to parse JSON bodies for this app
 app.use(bodyParser.json());
 
+
 // Create a connection to the database
 const db = mysql.createConnection({
-  host: 'snf-63590.vm.okeanos-global.grnet.gr',
-  user: 'root',
-  password: 'LIxoIOT*2024',
-  database: 'waste_db' 
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
-
 // Connect to the database
 db.connect((err) => {
   if (err) {
@@ -27,7 +28,15 @@ db.connect((err) => {
 });
 
 // Routes for handling CRUD operations on 'Companie'
-app.post('/api/companies', (req, res) => {
+app.get('/api/companie', (req, res) => {
+  let sql = 'SELECT * FROM Companie';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.post('/api/companie', (req, res) => {
   let data = {ID_Employee: req.body.ID_Employee, email: req.body.email, password: req.body.password, role: req.body.role};
   let sql = 'INSERT INTO Companie SET ?';
   db.query(sql, data, (err, result) => {
@@ -36,7 +45,7 @@ app.post('/api/companies', (req, res) => {
   });
 });
 
-app.put('/api/companies/:id', (req, res) => {
+app.put('/api/companie/:id', (req, res) => {
   let sql = `UPDATE Companie SET email = '${req.body.email}', password = '${req.body.password}', role = '${req.body.role}' WHERE ID_Employee = ${req.params.id}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
@@ -44,7 +53,7 @@ app.put('/api/companies/:id', (req, res) => {
   });
 });
 
-app.delete('/api/companies/:id', (req, res) => {
+app.delete('/api/companie/:id', (req, res) => {
   let sql = `DELETE FROM Companie WHERE ID_Employee = ${req.params.id}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
@@ -53,6 +62,14 @@ app.delete('/api/companies/:id', (req, res) => {
 });
 
 // Routes for handling CRUD operations on 'Regions'
+app.get('/api/regions', (req, res) => {
+  let sql = 'SELECT * FROM Regions';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 app.post('/api/regions', (req, res) => {
   let data = {ID_Region: req.body.ID_Region, name_region: req.body.name_region};
   let sql = 'INSERT INTO Regions SET ?';
@@ -79,6 +96,14 @@ app.delete('/api/regions/:id', (req, res) => {
 });
 
 // Routes for handling CRUD operations on 'Containers'
+app.get('/api/containers', (req, res) => {
+  let sql = 'SELECT * FROM Containers';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 app.post('/api/containers', (req, res) => {
   let data = {ID_Container: req.body.ID_Container, region_id: req.body.region_id, latitude: req.body.latitude, longitude: req.body.longitude};
   let sql = 'INSERT INTO Containers SET ?';
@@ -105,6 +130,14 @@ app.delete('/api/containers/:id', (req, res) => {
 });
 
 // Routes for handling CRUD operations on 'SensorData'
+app.get('/api/sensorData', (req, res) => {
+  let sql = 'SELECT * FROM SensorData';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 app.post('/api/sensorData', (req, res) => {
   let data = {
     ID_Record: req.body.ID_Record,
@@ -141,6 +174,14 @@ app.delete('/api/sensorData/:id', (req, res) => {
 });
 
 // Routes for handling CRUD operations on 'Final_Stats'
+app.get('/api/finalStats', (req, res) => {
+  let sql = 'SELECT * FROM Final_Stats';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 app.post('/api/finalStats', (req, res) => {
   let data = {ID_Result: req.body.ID_Result, ID_Container: req.body.ID_Container, fill_level: req.body.fill_level, timestamp: req.body.timestamp};
   let sql = 'INSERT INTO Final_Stats SET ?';
