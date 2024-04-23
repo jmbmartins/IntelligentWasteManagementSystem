@@ -86,9 +86,9 @@ Metodology:
 
 
 -----------------------------------------------------------------------------------------------
-#### Database Design
+### Database Design
 
-##### No SQL
+#### No SQL
 -   `companies` collection:
     -   Document ID: Auto-generated or use `ID_Employee` (String)
     -   Fields: `email` (String), `password` (String), `role` (String)
@@ -105,7 +105,7 @@ Metodology:
         -   Document ID: Auto-generated or use `ID_Result` (String)
         -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
 
-#### SQL
+### SQL
 
 1. **Companie**
     - `ID_Employee` (varchar(255), PRIMARY KEY)
@@ -144,7 +144,7 @@ Metodology:
 ---------------------------------------------------------
 
 
-#### Flow of Mobile Application
+### Flow of Mobile Application
 
 
 1. **Region Selection**:
@@ -169,11 +169,11 @@ Metodology:
 
 ----------------------------------------------------------
 
-#### BackEnd and FrontEnd Servers Hosted by VM
+### BackEnd and FrontEnd Servers Hosted by VM
 
 In this setup, we'll deploy a Node.js application along with a web server (Apache2) and PhpMyAdmin database on the same virtual machine (VM). This is a common configuration, especially when all these components are part of the same system.
 
-### Components:
+#### Components:
 
 1.  Node.js Application: This serves as the **backend server**, responsible for handling API requests, processing data, and interacting with the database.
 
