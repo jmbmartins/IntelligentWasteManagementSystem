@@ -11,7 +11,6 @@ const port = 3000;
 // Middleware to parse JSON bodies for this app
 app.use(bodyParser.json());
 
-
 // Create a connection to the database
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -19,6 +18,7 @@ const db = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
+
 // Connect to the database
 db.connect((err) => {
   if (err) {
@@ -46,16 +46,18 @@ app.post('/api/companie', (req, res) => {
 });
 
 app.put('/api/companie/:id', (req, res) => {
-  let sql = `UPDATE Companie SET email = '${req.body.email}', password = '${req.body.password}', role = '${req.body.role}' WHERE ID_Employee = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let sql = 'UPDATE Companie SET email = ?, password = ?, role = ? WHERE ID_Employee = ?';
+  let data = [req.body.email, req.body.password, req.body.role, req.params.id];
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Company updated...');
   });
 });
 
 app.delete('/api/companie/:id', (req, res) => {
-  let sql = `DELETE FROM Companie WHERE ID_Employee = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let sql = 'DELETE FROM Companie WHERE ID_Employee = ?';
+  let data = [req.params.id];
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Company deleted...');
   });
@@ -80,52 +82,20 @@ app.post('/api/regions', (req, res) => {
 });
 
 app.put('/api/regions/:id', (req, res) => {
-  let sql = `UPDATE Regions SET name_region = '${req.body.name_region}' WHERE ID_Region = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let data = [req.body.name_region, req.params.id];
+  let sql = 'UPDATE Regions SET name_region = ? WHERE ID_Region = ?';
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Region updated...');
   });
 });
 
 app.delete('/api/regions/:id', (req, res) => {
-  let sql = `DELETE FROM Regions WHERE ID_Region = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send('Region deleted...');
-  });
-});
-
-// Routes for handling CRUD operations on 'Containers'
-app.get('/api/containers', (req, res) => {
-  let sql = 'SELECT * FROM Containers';
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.post('/api/containers', (req, res) => {
-  let data = {ID_Container: req.body.ID_Container, region_id: req.body.region_id, latitude: req.body.latitude, longitude: req.body.longitude};
-  let sql = 'INSERT INTO Containers SET ?';
+  let data = [req.params.id];
+  let sql = 'DELETE FROM Regions WHERE ID_Region = ?';
   db.query(sql, data, (err, result) => {
     if (err) throw err;
-    res.send('Container added...');
-  });
-});
-
-app.put('/api/containers/:id', (req, res) => {
-  let sql = `UPDATE Containers SET region_id = '${req.body.region_id}', latitude = ${req.body.latitude}, longitude = ${req.body.longitude} WHERE ID_Container = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send('Container updated...');
-  });
-});
-
-app.delete('/api/containers/:id', (req, res) => {
-  let sql = `DELETE FROM Containers WHERE ID_Container = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send('Container deleted...');
+    res.send('Region deleted...');
   });
 });
 
@@ -158,16 +128,28 @@ app.post('/api/sensorData', (req, res) => {
 });
 
 app.put('/api/sensorData/:id', (req, res) => {
-  let sql = `UPDATE SensorData SET ID_Container = '${req.body.ID_Container}', s1_r = ${req.body.s1_r}, s1_o = ${req.body.s1_o}, s2_r = ${req.body.s2_r}, s2_o = ${req.body.s2_o}, s3_r = ${req.body.s3_r}, s3_o = ${req.body.s3_o}, timestamp = '${req.body.timestamp}' WHERE ID_Record = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let data = [
+    req.body.ID_Container,
+    req.body.s1_r,
+    req.body.s1_o,
+    req.body.s2_r,
+    req.body.s2_o,
+    req.body.s3_r,
+    req.body.s3_o,
+    req.body.timestamp,
+    req.params.id
+  ];
+  let sql = 'UPDATE SensorData SET ID_Container = ?, s1_r = ?, s1_o = ?, s2_r = ?, s2_o = ?, s3_r = ?, s3_o = ?, timestamp = ? WHERE ID_Record = ?';
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Sensor data updated...');
   });
 });
 
 app.delete('/api/sensorData/:id', (req, res) => {
-  let sql = `DELETE FROM SensorData WHERE ID_Record = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let data = [req.params.id];
+  let sql = 'DELETE FROM SensorData WHERE ID_Record = ?';
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Sensor data deleted...');
   });
@@ -192,16 +174,18 @@ app.post('/api/finalStats', (req, res) => {
 });
 
 app.put('/api/finalStats/:id', (req, res) => {
-  let sql = `UPDATE Final_Stats SET ID_Container = '${req.body.ID_Container}', fill_level = ${req.body.fill_level}, timestamp = '${req.body.timestamp}' WHERE ID_Result = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let data = [req.body.ID_Container, req.body.fill_level, req.body.timestamp, req.params.id];
+  let sql = 'UPDATE Final_Stats SET ID_Container = ?, fill_level = ?, timestamp = ? WHERE ID_Result = ?';
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Final stat updated...');
   });
 });
 
 app.delete('/api/finalStats/:id', (req, res) => {
-  let sql = `DELETE FROM Final_Stats WHERE ID_Result = ${req.params.id}`;
-  db.query(sql, (err, result) => {
+  let data = [req.params.id];
+  let sql = 'DELETE FROM Final_Stats WHERE ID_Result = ?';
+  db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Final stat deleted...');
   });
