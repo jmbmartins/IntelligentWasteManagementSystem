@@ -88,23 +88,6 @@ Metodology:
 -----------------------------------------------------------------------------------------------
 ### Database Design
 
-#### No SQL
--   `companies` collection:
-    -   Document ID: Auto-generated or use `ID_Employee` (String)
-    -   Fields: `email` (String), `password` (String), `role` (String)
--   `regions` collection:
-    -   Document ID: Auto-generated or use `ID_Region` (String)
-    -   Fields: `name_region` (String)
--   `containers` collection:
-    -   Document ID: Auto-generated or use `ID_Container` (String)
-    -   Fields: `region_id` (String), `latitude` (Float), `longitude` (Float)
-    -   Sub-collection: `sensor_data`
-        -   Document ID: Auto-generated or use `ID_Record` (String)
-        -   Fields: `s1_r` (Float), `s1_o` (Float), `s2_r` (Float), `s2_o` (Float), `s3_r` (Float), `s3_o` (Float), `timestamp` (Timestamp)
-    -   Sub-collection: `results_from_pc`
-        -   Document ID: Auto-generated or use `ID_Result` (String)
-        -   Fields: `fill_level` (Float), `timestamp` (Timestamp)
-
 ### SQL
 
 1. **Companie**
@@ -112,6 +95,8 @@ Metodology:
     - `email` (varchar(255))
     - `password` (varchar(255))
     - `role` (varchar(255))
+    - `token` (varchar(255))
+    - `time` (datetime)
 
 2. **Regions**
     - `ID_Region` (varchar(255), PRIMARY KEY)
@@ -179,6 +164,17 @@ In this setup, we'll deploy a Node.js application along with a web server (Apach
 
 2.  Web Server (Apache2): The web server serves static files and the **frontend** of your application. It acts as the interface between users' browsers and your Node.js backend.
 
-3.  PhpMyAdmin Database: PhpMyAdmin provides a graphical interface to manage the MySQL database. 
+3.  PhpMyAdmin Database: PhpMyAdmin provides a graphical interface to manage the MySQL database.
+
+--------------------------------------------------------
+
+### Items to Update Realtory
+
+| Change Made                                       | Section to Change on Relatory | Situation    |
+|---------------------------------------------------|--------------------------------|--------------|
+| Refazer diagrama de caso de uso web app          | Casos de Uso App              | Not changed |
+| Refazer diagrama de arquitetura          | Arquitetura do Sistema              | Not changed |
+| Add column `token`, `date` on table 'companie'   | Database Structure Description| Not changed  |
+
 
 
