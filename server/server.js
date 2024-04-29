@@ -37,7 +37,14 @@ app.get('/api/companie', (req, res) => {
 });
 
 app.post('/api/companie', (req, res) => {
-  let data = {ID_Employee: req.body.ID_Employee, email: req.body.email, password: req.body.password, role: req.body.role};
+  let data = {
+    ID_Employee: req.body.ID_Employee,
+    email: req.body.email,
+    password: req.body.password,
+    admin: req.body.admin,
+    token: req.body.token,
+    timer: req.body.timer
+  };
   let sql = 'INSERT INTO Companie SET ?';
   db.query(sql, data, (err, result) => {
     if (err) throw err;
@@ -46,8 +53,8 @@ app.post('/api/companie', (req, res) => {
 });
 
 app.put('/api/companie/:id', (req, res) => {
-  let sql = 'UPDATE Companie SET email = ?, password = ?, role = ? WHERE ID_Employee = ?';
-  let data = [req.body.email, req.body.password, req.body.role, req.params.id];
+  let data = [req.body.email, req.body.password, req.body.admin, req.body.token, req.body.timer, req.params.id];
+  let sql = 'UPDATE Companie SET email = ?, password = ?, admin = ?, token = ?, timer = ? WHERE ID_Employee = ?';
   db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Company updated...');
@@ -55,8 +62,8 @@ app.put('/api/companie/:id', (req, res) => {
 });
 
 app.delete('/api/companie/:id', (req, res) => {
-  let sql = 'DELETE FROM Companie WHERE ID_Employee = ?';
   let data = [req.params.id];
+  let sql = 'DELETE FROM Companie WHERE ID_Employee = ?';
   db.query(sql, data, (err, result) => {
     if (err) throw err;
     res.send('Company deleted...');
