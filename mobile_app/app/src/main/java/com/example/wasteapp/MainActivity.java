@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Check if the user has already selected a region
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        if (prefs.getBoolean("regionSelected", false)) {
+        String selectedRegion = prefs.getString("selectedRegion", "");
+        if (!selectedRegion.isEmpty()) {
             // If the user has already selected a region, go to the "View waste bins" page
             startActivity(new Intent(this, ViewWasteBinsActivity.class));
             finish();
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // When a region is selected, save the selection and go to the "View waste bins" page
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean("regionSelected", true);
+                editor.putString("selectedRegion", regions.get(position).getName());
                 editor.apply();
 
                 startActivity(new Intent(MainActivity.this, ViewWasteBinsActivity.class));

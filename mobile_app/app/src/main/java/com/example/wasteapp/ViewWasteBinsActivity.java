@@ -1,6 +1,7 @@
 package com.example.wasteapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,16 @@ public class ViewWasteBinsActivity extends Activity {
         changeRegionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle change region
+                // Clear the selected region from shared preferences
+                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove("selectedRegion");
+                editor.apply();
+
+                // Go back to the region selection activity
+                Intent intent = new Intent(ViewWasteBinsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
