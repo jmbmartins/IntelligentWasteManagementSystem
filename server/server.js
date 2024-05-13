@@ -106,6 +106,43 @@ app.delete('/api/regions/:id', (req, res) => {
   });
 });
 
+
+// Routes for handling CRUD operations on 'Containers'
+app.get('/api/containers', (req, res) => {
+  let sql = 'SELECT * FROM Containers';
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.post('/api/containers', (req, res) => {
+  let sql = 'INSERT INTO Containers SET ID_Container = ?, ID_Region = ?, latitude = ?, longitude = ?';
+  let data = [req.body.ID_Container, req.body.ID_Region, req.body.latitude, req.body.longitude];
+  db.query(sql, data, (err, result) => {
+    if (err) throw err;
+    res.send('Container added...');
+  });
+});
+
+app.put('/api/containers/:id', (req, res) => {
+  let sql = 'UPDATE Containers SET ID_Region = ?, latitude = ?, longitude = ? WHERE ID_Container = ?';
+  let data = [req.body.ID_Region, req.body.latitude, req.body.longitude, req.params.id];
+  db.query(sql, data, (err, result) => {
+    if (err) throw err;
+    res.send('Container updated...');
+  });
+});
+
+app.delete('/api/containers/:id', (req, res) => {
+  let sql = 'DELETE FROM Containers WHERE ID_Container = ?';
+  let data = [req.params.id];
+  db.query(sql, data, (err, result) => {
+    if (err) throw err;
+    res.send('Container deleted...');
+  });
+});
+
 // Routes for handling CRUD operations on 'SensorData'
 app.get('/api/sensorData', (req, res) => {
   let sql = 'SELECT * FROM SensorData';
