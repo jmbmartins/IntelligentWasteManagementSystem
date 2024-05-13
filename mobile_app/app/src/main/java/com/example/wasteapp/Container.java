@@ -1,32 +1,37 @@
 package com.example.wasteapp;
 
-public class Container {
-    private double distance;
-    private int fillLevel;
 
-    public Container(double distance, int fillLevel) {
-        this.distance = distance;
+public class Container {
+    private int id;
+    private double fillLevel;
+    private String timestamp;
+    private double distance;
+
+    public Container(int id, double fillLevel, String timestamp, double distance) {
+        this.id = id;
         this.fillLevel = fillLevel;
+        this.timestamp = timestamp;
+        this.distance = distance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getFillLevel() {
+        return fillLevel;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
     }
 
     public double getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public int getFillLevel() {
-        return fillLevel;
-    }
-
-    public void setFillLevel(int fillLevel) {
-        this.fillLevel = fillLevel;
-    }
-
     @Override
     public String toString() {
-        return "Distance: " + distance + "km, Fill Level: " + fillLevel + "%";
+        return "Container ID: " + id + ", Fill Level: " + fillLevel + ", Timestamp: " + timestamp + ", Distance: " + distance;
     }
 }
