@@ -38,13 +38,15 @@ public class ViewWasteBinsActivity extends Activity {
     private int regionID;
     private String regionName;
 
+    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.waste_bins);
 
         TextView regionTitle = findViewById(R.id.regionTitle);
-        ListView listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         Button changeRegionButton = findViewById(R.id.changeRegionButton);
         Button quitButton = findViewById(R.id.quitButton);
 
@@ -100,15 +102,12 @@ public class ViewWasteBinsActivity extends Activity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
 
-                // First, fetch the containers for the selected region
                 Request containersRequest = new Request.Builder()
                         .url("http://snf-63590.vm.okeanos-global.grnet.gr:3000/api/containers")
                         .build();
 
                 try (Response containersResponse = client.newCall(containersRequest).execute()) {
                     String containersData = containersResponse.body().string();
-                    Log.d("getContainersByRegion", "Containers data: " + containersData); // Log the containers data
-
                     JSONArray containersArray = new JSONArray(containersData);
 
                     List<Integer> containerIds = new ArrayList<>();
@@ -116,37 +115,34 @@ public class ViewWasteBinsActivity extends Activity {
                     for (int i = 0; i < containersArray.length(); i++) {
                         JSONObject containerObject = containersArray.getJSONObject(i);
 
-                        if (containerObject.has("ID_Region") && containerObject.has("ID_Container") && containerObject.has("lat") && containerObject.has("long")) {
+                        if (containerObject.has("ID_Region") && containerObject.has("ID_Container") && containerObject.has("latitude") && containerObject.has("longitude")) {
                             int jsonRegionId = containerObject.getInt("ID_Region");
                             int jsonContainerId = containerObject.getInt("ID_Container");
                             float jsonLat = (float) containerObject.getDouble("latitude");
                             float jsonLong = (float) containerObject.getDouble("longitude");
 
-                            Log.d("getContainersByRegion", "Container " + jsonContainerId + ": Region ID = " + jsonRegionId + ", Lat = " + jsonLat + ", Long = " + jsonLong); // Log the container details
+                            Log.d("getContainersByRegion", "Container ID: " + jsonContainerId + ", Region ID: " + jsonRegionId + ", Latitude: " + jsonLat + ", Longitude: " + jsonLong);
 
-                            // If the container's region matches the selected region, add it to the list
                             if (jsonRegionId == regionID) {
                                 containerIds.add(jsonContainerId);
-
-                                // Calculate the distance to the container
                                 double distance = calculateDistance(userLat, userLong, jsonLat, jsonLong);
                                 containerDistances.put(jsonContainerId, distance);
+
+                                Log.d("getContainersByRegion", "Added container with ID: " + jsonContainerId + ", Distance: " + distance);
                             }
                         }
                     }
 
-                    Log.d("getContainersByRegion", "Container IDs: " + containerIds); // Log the container IDs
-
-                    // Then, fetch the final stats for the selected containers
                     Request statsRequest = new Request.Builder()
                             .url("http://snf-63590.vm.okeanos-global.grnet.gr:3000/api/finalStats")
                             .build();
 
                     try (Response statsResponse = client.newCall(statsRequest).execute()) {
                         String statsData = statsResponse.body().string();
-                        Log.d("getContainersByRegion", "Stats data: " + statsData); // Log the stats data
-
                         JSONArray statsArray = new JSONArray(statsData);
+
+                        // Create a map to keep track of the latest timestamp for each container
+                        Map<Integer, Container> latestContainers = new HashMap<>();
 
                         for (int i = 0; i < statsArray.length(); i++) {
                             JSONObject statsObject = statsArray.getJSONObject(i);
@@ -156,22 +152,34 @@ public class ViewWasteBinsActivity extends Activity {
                                 double fillLevel = statsObject.getDouble("fill_level");
                                 String timestamp = statsObject.getString("timestamp");
 
-                                Log.d("getContainersByRegion", "Stats for container " + id + ": Fill level = " + fillLevel + ", Timestamp = " + timestamp); // Log the stats details
+                                Log.d("getContainersByRegion", "Stats - Container ID: " + id + ", Fill Level: " + fillLevel + ", Timestamp: " + timestamp);
 
-                                // If the container is in the list of selected containers, add it to the list
                                 if (containerIds.contains(id)) {
                                     double distance = containerDistances.get(id);
                                     Container container = new Container(id, fillLevel, timestamp, distance);
-                                    containers.add(container);
+
+                                    // If this container has not been encountered before, or if this record's timestamp is later than the latest timestamp for this container
+                                    if (!latestContainers.containsKey(id) || container.getTimestamp().compareTo(latestContainers.get(id).getTimestamp()) > 0) {
+                                        // Update the record for this container
+                                        latestContainers.put(id, container);
+                                    }
                                 }
                             }
                         }
 
-                        // Update the ListView on the main thread
+                        // Replace the containers list with the values from the latestContainers map
+                        containers = new ArrayList<>(latestContainers.values());
+
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                adapter.notifyDataSetChanged();
+                                // Log the details of the containers that are going to be displayed in the ListView
+                                for (Container container : containers) {
+                                    Log.d("getContainersByRegion", "Post - Container ID: " + container.getId() + ", Fill Level: " + container.getFillLevel() + ", Timestamp: " + container.getTimestamp() + ", Distance: " + container.getDistance());
+                                }
+                                adapter = new ContainerAdapter(ViewWasteBinsActivity.this, containers);
+                                listView.setAdapter(adapter);
+                                Log.d("ViewWasteBinsActivity", "Number of items in adapter: " + adapter.getCount());
                             }
                         });
 
@@ -185,7 +193,6 @@ public class ViewWasteBinsActivity extends Activity {
             }
         });
     }
-
     private double calculateDistance(double userLat, double userLong, double containerLat, double containerLong) {
         // Convert degrees to radians
         userLat = Math.toRadians(userLat);
