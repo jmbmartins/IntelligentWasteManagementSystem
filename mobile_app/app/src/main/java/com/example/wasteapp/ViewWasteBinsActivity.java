@@ -117,7 +117,9 @@ public class ViewWasteBinsActivity extends Activity {
                 for (Container container : containers) {
                     // Calculate the score for each container
                     // Lower fill level and closer distance results in a higher score
-                    double score = 1.0 / (container.getFillLevel() * container.getDistance());
+                    // Squaring the distance gives it more weight in the calculation
+                    double score = 1.0 / (container.getFillLevel() * Math.pow(container.getDistance(), 2));
+                    Log.d("ViewDecision", "Container: " + containers.indexOf(container) + " Score:" + score);
 
                     // If this container's score is higher than the current max score,
                     // update the max score and the better container
