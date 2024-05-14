@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +17,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/regionTitle"
-        android:layout_above="@+id/changeRegionButton"
+        android:layout_above="@+id/intelligentSuggestionButton"
         android:divider="#BDBDBD"
         android:dividerHeight="0.5dp"
         android:background="#FFFFFF"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/intelligentSuggestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intelligent Suggestion"
+        android:textColor="#FFFFFF"
+        android:background="#3F51B5"
+        android:layout_above="@+id/changeRegionButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:padding="10dp" />
 
     <Button

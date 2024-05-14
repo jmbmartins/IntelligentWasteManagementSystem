@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,6 +51,8 @@ public class ViewWasteBinsActivity extends Activity {
         listView = findViewById(R.id.listView);
         Button changeRegionButton = findViewById(R.id.changeRegionButton);
         Button quitButton = findViewById(R.id.quitButton);
+        Button intelligentSuggestionButton = findViewById(R.id.intelligentSuggestionButton);
+
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         regionName = prefs.getString("selectedRegion", "Default Region");
@@ -67,6 +71,7 @@ public class ViewWasteBinsActivity extends Activity {
         adapter = new ContainerAdapter(this, containers);
         listView.setAdapter(adapter);
         Log.d("ViewWasteBinsActivity", "Number of items in adapter: " + adapter.getCount());
+
 
         changeRegionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +94,45 @@ public class ViewWasteBinsActivity extends Activity {
                 editor.apply();
 
                 finish();
+            }
+        });
+
+        intelligentSuggestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (containers.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No containers available", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (containers.size() == 1) {
+                    Toast.makeText(getApplicationContext(), "Only one container available: ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                double maxScore = -1;
+                Container betterContainer = null;
+
+                for (Container container : containers) {
+                    // Calculate the score for each container
+                    // Lower fill level and closer distance results in a higher score
+                    double score = 1.0 / (container.getFillLevel() * container.getDistance());
+
+                    // If this container's score is higher than the current max score,
+                    // update the max score and the better container
+                    if (score > maxScore) {
+                        maxScore = score;
+                        betterContainer = container;
+                    }
+                }
+
+                // Display the position of the better container in the ListView
+                if (betterContainer != null) {
+                    int position = containers.indexOf(betterContainer);
+                    String message = String.format("Better container is at position %d in the list", position + 1);
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
