@@ -156,6 +156,20 @@ END; //
 DELIMITER ;
 ```
 
+This MySQL trigger calculates the fill level of a waste bin each time new sensor data is added to the `SensorData` table. Here's a simplified explanation:
+
+1.  **Trigger Activation**: The trigger activates when new sensor data is added. It only proceeds if the sensor has completed a full sweep of the bin (indicated by a `position` of `180`).
+
+2.  **Data Retrieval**: The trigger fetches the last 10 distance measurements (`r`) from the `SensorData` table for the current bin (`ID_Container`).
+
+3.  **Calculation**: The trigger calculates the average of these 10 measurements, then subtracts this from the total height of the bin to get the height of the waste. This is then converted to a percentage of the bin's total height to get the fill level.
+
+4.  **Update Stats**: The calculated fill level, along with the bin ID and the current time, is added to the `final_stats` table for monitoring and analysis.
+
+5.  **End**: If the sensor has not completed a full sweep, the trigger does nothing and waits for the next data to be added.
+
+This process allows for real-time monitoring of the waste bin's fill level based on the sensor data.
+
 
 ---------------------------------------------------------
 
