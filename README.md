@@ -112,11 +112,9 @@ Metodology:
     - `ID_Record` (varchar(255), PRIMARY KEY)
     - `ID_Container` (varchar(255), FOREIGN KEY REFERENCES `Containers` (`ID_Container`))
     - `s1_r` (float)
-    - `s1_o` (float)
     - `s2_r` (float)
-    - `s2_o` (float)
     - `s3_r` (float)
-    - `s3_o` (float)
+    - `position` (int)
     - `timestamp` (timestamp)
 
 5. **Final_Stats**
@@ -124,6 +122,36 @@ Metodology:
     - `ID_Container` (varchar(255), FOREIGN KEY REFERENCES `Containers` (`ID_Container`))
     - `fill_level` (float)
     - `timestamp` (timestamp)
+  
+
+Trigger to calculate the fill level:
+`DELIMITER //
+CREATE TRIGGER after_sensor_insert
+AFTER INSERT ON SensorData
+FOR EACH ROW
+BEGIN
+  IF NEW.position = 180 THEN
+    DECLARE i INT DEFAULT 0;
+    DECLARE r FLOAT, pos FLOAT;
+    DECLARE z1 FLOAT DEFAULT 20; -- replace with your sensor 1 height
+    DECLARE z2 FLOAT DEFAULT 40; -- replace with your sensor 2 height
+    DECLARE z3 FLOAT DEFAULT 60; -- replace with your sensor 3 height
+    DECLARE bin_height FLOAT DEFAULT 100; -- replace with your bin height
+    DECLARE total_distance FLOAT DEFAULT 0;
+    DECLARE fill_level FLOAT;
+    DECLARE cur CURSOR FOR SELECT s1_r, s2_r, s3_r, position FROM SensorData WHERE ID_Container = NEW.ID_Container ORDER BY id DESC LIMIT 10;
+    OPEN cur;
+    WHILE i < 10 DO
+      FETCH NEXT FROM cur INTO r, pos;
+      SET total_distance = total_distance + r;
+      SET i = i + 1;
+    END WHILE;
+    CLOSE cur;
+    SET fill_level = ((bin_height - (total_distance / i)) / bin_height) * 100;
+    INSERT INTO final_stats (ID_Container, fill_level, timestamp) VALUES (NEW.ID_Container, fill_level, NOW());
+  END IF;
+END; //
+DELIMITER ;`
 
 
 ---------------------------------------------------------
