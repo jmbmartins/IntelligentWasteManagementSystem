@@ -125,7 +125,8 @@ Metodology:
   
 
 Trigger to calculate the fill level:
-`DELIMITER //
+
+```DELIMITER //
 CREATE TRIGGER after_sensor_insert
 AFTER INSERT ON SensorData
 FOR EACH ROW
@@ -151,7 +152,7 @@ BEGIN
     INSERT INTO final_stats (ID_Container, fill_level, timestamp) VALUES (NEW.ID_Container, fill_level, NOW());
   END IF;
 END; //
-DELIMITER ;`
+DELIMITER ;´´´
 
 
 ---------------------------------------------------------
