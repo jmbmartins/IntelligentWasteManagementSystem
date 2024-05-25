@@ -157,11 +157,9 @@ app.post('/api/sensorData', (req, res) => {
     ID_Record: req.body.ID_Record,
     ID_Container: req.body.ID_Container,
     s1_r: req.body.s1_r,
-    s1_o: req.body.s1_o,
     s2_r: req.body.s2_r,
-    s2_o: req.body.s2_o,
     s3_r: req.body.s3_r,
-    s3_o: req.body.s3_o,
+    position: req.body.position,
     timestamp: req.body.timestamp
   };
   let sql = 'INSERT INTO SensorData SET ?';
