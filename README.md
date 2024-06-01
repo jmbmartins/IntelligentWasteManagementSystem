@@ -135,9 +135,6 @@ BEGIN
   DECLARE i INT DEFAULT 0;
   DECLARE r FLOAT;
   DECLARE pos FLOAT;
-  DECLARE z1 FLOAT DEFAULT 20; -- replace with your sensor 1 height
-  DECLARE z2 FLOAT DEFAULT 40; -- replace with your sensor 2 height
-  DECLARE z3 FLOAT DEFAULT 60; -- replace with your sensor 3 height
   DECLARE bin_height FLOAT DEFAULT 100; -- replace with your bin height
   DECLARE total_distance FLOAT DEFAULT 0;
   DECLARE fill_level FLOAT;
